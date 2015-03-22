@@ -8,6 +8,7 @@
 2015-03-22: v.1.2: added parallel display of rainbow format
 2015-03-22: v.1.3: can set the (approximate) time using capacitive sensors
 2015-03-22: v.1.4: show rainbow time while setting the clock
+2015-03-22: v.1.5: bugfix in rainbow time
 
 Original RGB LEDs:
     ___
@@ -92,6 +93,9 @@ Right capacitive sensor:
 
 */
 
+//if NDEBUG is #defined, this is a release version
+#define NDEBUG
+
 #include <CapacitiveSensor.h>
 #include <Time.h>
 
@@ -157,9 +161,9 @@ void setup()
   pinMode(error_pin,OUTPUT);
   Serial.begin(9600); //Cannot be used: chip is used stand-alone
   #ifndef NDEBUG
-  Serial.println("ApproxyClock v. 1.1 (debug version)");
+  Serial.println("ApproxyClock v. 1.5 (debug version)");
   #else //NDEBUG
-  Serial.println("ApproxyClock v. 1.1 (release version)");
+  Serial.println("ApproxyClock v. 1.5 (release version)");
   #endif //NDEBUG
   TestTime();
 }
@@ -482,12 +486,12 @@ void ShowTimeOriginal(const int secs, const int mins, const int hours)
 void ShowTimeRainbow(const int secs, const int mins, const int hours)
 {
   #ifndef NDEBUG
-  if (hours <  0) { OnError("ShowTime: hours <  0, hours = " + String(hours)); }
-  if (hours > 23) { OnError("ShowTime: hours > 23, hours = " + String(hours)); }
-  if (mins <  0) { OnError("ShowTime: mins <  0, mins = " + String(mins)); }
-  if (mins > 59) { OnError("ShowTime: mins > 59, mins = " + String(mins)); }
-  if (secs <  0) { OnError("ShowTime: secs <  0, secs = " + String(secs)); }
-  if (secs > 59) { OnError("ShowTime: secs > 59, secs = " + String(secs)); }
+  if (hours <  0) { OnError("ShowTimeRainbow: hours <  0, hours = " + String(hours)); }
+  if (hours > 23) { OnError("ShowTimeRainbow: hours > 23, hours = " + String(hours)); }
+  if (mins <  0) { OnError("ShowTimeRainbow: mins <  0, mins = " + String(mins)); }
+  if (mins > 59) { OnError("ShowTimeRainbow: mins > 59, mins = " + String(mins)); }
+  if (secs <  0) { OnError("ShowTimeRainbow: secs <  0, secs = " + String(secs)); }
+  if (secs > 59) { OnError("ShowTimeRainbow: secs > 59, secs = " + String(secs)); }
   #endif // NDEBUG
   int red_value = 0;
   int green_value = 0;
@@ -502,7 +506,7 @@ void ShowTimeRainbow(const int secs, const int mins, const int hours)
   {
     const double f = static_cast<double>(((hours-8)*60) + mins) / (8 * 60);
     blue_value = static_cast<int>(f * 255.0);
-    green_value = 255 - red_value;    
+    green_value = 255 - blue_value;    
   }
   else if (hours < 24)
   {
@@ -510,7 +514,21 @@ void ShowTimeRainbow(const int secs, const int mins, const int hours)
     red_value = static_cast<int>(f * 255.0);
     blue_value = 255 - red_value;
   }
+  
   analogWrite(red_rainbow_pin,red_value);
   analogWrite(green_rainbow_pin,green_value);
   analogWrite(blue_rainbow_pin,blue_value);
+  #ifndef NDEBUG
+  const String debug_str 
+    = String("RGB:") + String(red_value) + "," + String(green_value) + "," + String(blue_value)
+  ;
+  Serial.println(debug_str);
+  
+  if (red_value   <   0) { OnError("ShowTimeRainbow: red_value <  0, hours = " + String(hours)); }
+  if (red_value   > 255) { OnError("ShowTimeRainbow: red_value > 255, hours = " + String(hours)); }
+  if (green_value <   0) { OnError("ShowTimeRainbow: green_value <  0, mins = " + String(mins)); }
+  if (green_value > 255) { OnError("ShowTimeRainbow: green_value > 255, mins = " + String(mins)); }
+  if (blue_value  <   0) { OnError("ShowTimeRainbow: blue_value <  0, secs = " + String(secs)); }
+  if (blue_value  > 255) { OnError("ShowTimeRainbow: blue_value > 255, secs = " + String(secs)); }
+  #endif // NDEBUG
 }
