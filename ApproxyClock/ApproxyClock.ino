@@ -7,6 +7,7 @@
 2015-03-22: v.1.1: use of Time library
 2015-03-22: v.1.2: added parallel display of rainbow format
 2015-03-22: v.1.3: can set the (approximate) time using capacitive sensors
+2015-03-22: v.1.4: show rainbow time while setting the clock
 
 Original RGB LEDs:
     ___
@@ -116,6 +117,7 @@ CapacitiveSensor sensor2
 const int error_pin = 13;
 
 void OnError(const String& error_message)
+
 {
   Serial.print("ERROR: ");  
   Serial.println(error_message);  
@@ -213,6 +215,7 @@ void SetHours()
     }
     //This line is put here, because the user must first accept to edit the time
     ShowTimeOriginal(0,0,h); //secs, mins, hours
+    ShowTimeRainbow(second(),minute(),h); //secs, mins, hours
     delay(100);
   }
   #ifndef NDEBUG
@@ -232,6 +235,7 @@ void SetMinutes()
   while (1)
   {
     ShowTimeOriginal(0,m,0); //secs, mins, hours
+    ShowTimeRainbow(second(),m,hour()); //secs, mins, hours
     const int sensor_state = GetSensors();
     if (sensor_state == state_left_sensor_pressed)
     {
@@ -263,6 +267,7 @@ void SetSeconds()
   while (1)
   {
     ShowTimeOriginal(s,0,0); //secs, mins, hours
+    ShowTimeRainbow(s,minute(),hour()); //secs, mins, hours
     const int sensor_state = GetSensors();
     if (sensor_state == state_left_sensor_pressed)
     {
