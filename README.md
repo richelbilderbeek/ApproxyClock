@@ -29,6 +29,22 @@ Rainbow mode displays the time according to the colors of the rainbow:
  
 ## Pictures
 
-![ApproxyClock prototype for 2015-03-21](ApproxyClockPrototype1.jpg)
+Ordered from new to old
+
+### Prototype 3
+
+Added touch sensors
+
+![ApproxyClock prototype for 2015-03-22](ApproxyClockPrototype3.jpg)
+
+### Prototype 2
+
+Added rainbow time
 
 ![ApproxyClock prototype for 2015-03-22](ApproxyClockPrototype2.jpg)
+
+### Prototype 1
+
+![ApproxyClock prototype for 2015-03-21](ApproxyClockPrototype1.jpg)
+
+
