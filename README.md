@@ -2,30 +2,17 @@
 
 Clock that gives correct time, that can only be approximated
 
-## How to read the time
+All the files you need:
 
-The time is shown in two different modes:
- * Classic mode
- * Rainbow mode
+ * [Arduino code](ApproxyClock/ApproxyClock.ino)
+ * [Fritzing schematic](ApproxyClock.fzz)
+ * [Etch copper bottom](ApproxyClock_etch_copper_bottom.pdf)
+ * [Etch copper bottom, mirrored](ApproxyClock_etch_copper_bottom_mirror.pdf)
+ * [Etch copper top](ApproxyClock_etch_copper_top.pdf)
+ * [Etch copper top, mirrored](ApproxyClock_etch_copper_top_mirror.pdf)
 
-Classic mode displays the seconds in red, minutes in green, and hours in blue.
- * 00:00:00: black
- * 00:00:59: full red
- * 00:59:00: full green
- * 23:00:00: full blue
- * 00:59:59: full yellow
- * 23:59:00: full cyan
- * 23:00:59: full magenta
- * 23:59:59: full white
 
-Rainbow mode displays the time according to the colors of the rainbow:
- * 00:00: red
- * 04:00: yellow
- * 08:00: green
- * 12:00: cyan
- * 16:00: blue
- * 20:00: magenta
-
+You can also read the [FAQ](FAQ.md).
  
 ## Pictures
 

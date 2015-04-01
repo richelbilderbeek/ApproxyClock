@@ -9,6 +9,7 @@
 2015-03-22: v.1.3: can set the (approximate) time using capacitive sensors
 2015-03-22: v.1.4: show rainbow time while setting the clock
 2015-03-22: v.1.5: bugfix in rainbow time
+2015-04-01: v.1.6: capacitive sensor threshold is changed according to use of battery or USB/adapter
 
 Original RGB LEDs:
     ___
@@ -99,6 +100,10 @@ Right capacitive sensor:
 #include <CapacitiveSensor.h>
 #include <Time.h>
 
+//If you use an USB cable or adapter, set use_usb_for_power to true
+//If you use 4x AAA batteries, set use_usb_for_power to false
+const bool use_usb_for_power = false;
+
 const int blue_original_pin = 3;
 const int red_original_pin = 5;
 const int green_original_pin = 6;
@@ -119,6 +124,15 @@ CapacitiveSensor sensor2
 
 
 const int error_pin = 13;
+
+//Threshold for capacitive sensor, which determines the sensitivity of the sensors
+// - too low: the program will think more often there is a touch, possibly even when you do not touch
+// - too high: the program will think less often there is a touch, possibly even when you do touch
+//Some guidelines I use:
+// - Using an adapter or USB: 200
+// - Using 4x 1.5 AAA battery: 50
+const int threshold_usb = 200;
+const int threshold_batteries = 50;
 
 void OnError(const String& error_message)
 
@@ -187,8 +201,11 @@ int GetSensors()
   const int r2 = sensor2.capacitiveSensor(samples);
   //The threshold value, which determines the sensitivity of the sensors
   // - too low: the program will think more often there is a touch, possibly even when you do not touch
-  // - too high: the program will think less often there is a touch, possibly even when you do touch 
-  const int threshold = 200;
+  // - too high: the program will think less often there is a touch, possibly even when you do touch
+  //Some guidelines I use:
+  // - Using an adapter or USB: 200
+  // - Using 4x 1.5 AAA battery: 50
+  const int threshold = use_usb_for_power ? threshold_usb : threshold_batteries;
   const int state =  (r1 >= threshold ? 2 : 0) + (r2 >= threshold ? 1 : 0);
   return state;
 }
