@@ -45,24 +45,14 @@ Rainbow RGB LEDs:
 3: Red, connect with resistance of 1000 (brown-black-red-gold) to Arduino pin 10 (note: must be a PWM pin)
 4: Green, connect with resistance of 2200 (red-red-red-gold) to Arduino pin 11 (note: must be a PWM pin)
 
-
 Left capacitive sensor:
-  
-    2              4 
-    |  +--------+  |
-    +--+   RH   +--+
-    |  +--------+
-    |
-  +-+-+
-  |   |
-  |   |
-  |RS |
-  |   |
-  +-+-+
-    |
-    |
-    X
-  
+
+       +--------+     +--------+  
+   2 --+   RS   +--+--+   RH   |-- 4
+       +--------+  |  +--------+
+                   |
+                   X
+
   2: sensor pin
   4: helper pin
   RH: 'resistance helper', resistance of at least 1 Mega-Ohm (brown-black-green-gold)
@@ -70,22 +60,13 @@ Left capacitive sensor:
   X: place to touch wire
 
 Right capacitive sensor:
-  
-    7              4 
-    |  +--------+  |
-    +--+   RH   +--+
-    |  +--------+
-    |
-  +-+-+
-  |   |
-  |   |
-  |RS |
-  |   |
-  +-+-+
-    |
-    |
-    X
-  
+
+       +--------+     +--------+  
+   7 --+   RS   +--+--+   RH   |-- 4
+       +--------+  |  +--------+
+                   |
+                   X
+
   7: sensor pin
   4: helper pin
   RH: 'resistance helper', resistance of at least 1 Mega-Ohm (brown-black-green-gold)
