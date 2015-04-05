@@ -43,7 +43,7 @@ If this is not the case, the capacitive sensors will not work.
 
 About ten euros
 
-## Can I make anApproxyClock myself?
+## Can I make an ApproxyClock myself?
 
 Yes, it is rather easy. All schematics and code are on this GitHub.
 
