@@ -81,9 +81,13 @@ Right capacitive sensor:
 #include <CapacitiveSensor.h>
 #include <Time.h>
 
+//User setup
+
 //If you use an USB cable or adapter, set use_usb_for_power to true
 //If you use 4x AAA batteries, set use_usb_for_power to false
 const bool use_usb_for_power = false;
+
+//End of user setup
 
 const int blue_original_pin = 3;
 const int red_original_pin = 5;
@@ -92,6 +96,16 @@ const int green_original_pin = 6;
 const int blue_rainbow_pin = 9;
 const int red_rainbow_pin = 10;
 const int green_rainbow_pin = 11;
+
+/* When using the PCB print:
+const int blue_original_pin  = 6;
+const int red_original_pin   = 3;
+const int green_original_pin = 5;
+
+const int blue_rainbow_pin  = 11;
+const int red_rainbow_pin   = 9;
+const int green_rainbow_pin = 10;
+*/
 
 const int pin_sensor1 =  2;
 const int pin_helper1 =  4;

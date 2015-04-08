@@ -18,6 +18,11 @@ You can also read the [FAQ](FAQ.md).
 
 Ordered from new to old
 
+### 2015-04-08: Start with PCB
+
+[ApproxyClock PCB 2015-04-08](ApproxyClockPcb1.jpg)
+[ApproxyClock PCB 2015-04-08](ApproxyClockPcb2.jpg)
+
 ### 2015-04-06: Wrapped a paper casing around it:
 
 ![ApproxyClock 2015-04-06](ApproxyClock5.jpg)
