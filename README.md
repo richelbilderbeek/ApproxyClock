@@ -1,5 +1,7 @@
 # ApproxyClock
 
+[![Build Status](https://travis-ci.org/richelbilderbeek/ApproxyClock.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ApproxyClock)
+
 Clock that gives correct time, that can only be approximated
 
 All the files you need:
