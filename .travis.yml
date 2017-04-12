@@ -1,0 +1,19 @@
+language: cpp
+compiler: gcc
+
+install:
+  # arduino
+  - sudo apt-get install arduino
+  # ino
+  - cd ..
+  - git clone git://github.com/amperka/ino.git
+  - cd ino
+  - sudo make install
+  - sudo easy_install `cat requirements.txt`
+  - cd ..
+  - cd travis_arduino
+
+script: 
+  - ino build
+  # Check if resulting file exists
+  - if [ -f .build/uno/firmware.hex ]; then return 0; else return 1; fi
