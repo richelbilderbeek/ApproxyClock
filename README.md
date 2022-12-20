@@ -7,7 +7,7 @@ It is a clock that gives the correct time, but humand can only approximately est
 
 All the files you need:
 
- * [Arduino code](ApproxyClock/ApproxyClock.ino)
+ * [Arduino code](src/ApproxyClock.ino)
  * [Fritzing schematic](ApproxyClock.fzz)
  * [Etch copper bottom](ApproxyClock_etch_copper_bottom.pdf)
  * [Etch copper bottom, mirrored](ApproxyClock_etch_copper_bottom_mirror.pdf)
