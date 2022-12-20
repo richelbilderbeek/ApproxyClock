@@ -1,7 +1,5 @@
 # ApproxyClock
 
-[![Build Status](https://travis-ci.org/richelbilderbeek/ApproxyClock.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ApproxyClock)
-
 The ApproxyClock is [one of my machines](https://github.com/richelbilderbeek/Machines) that uses Arduino.
 It is a clock that gives the correct time, but humand can only approximately estimate it.
 
