@@ -79,13 +79,13 @@ Right capacitive sensor:
 #define NDEBUG
 
 #include <CapacitiveSensor.h>
-#include <Time.h>
+#include <TimeLib.h>
 
 //User setup
 
 //If you use an USB cable or adapter, set use_usb_for_power to true
 //If you use 4x AAA batteries, set use_usb_for_power to false
-const bool use_usb_for_power = false;
+const bool use_usb_for_power = true;
 
 //End of user setup
 
