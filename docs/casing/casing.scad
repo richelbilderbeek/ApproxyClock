@@ -20,7 +20,7 @@ params = create_params(
   wire_hole_diameter = 3.4 + 1.0, // Add uncertainty // The hole for a wire
   speaker_hole_diameter = 2.0 + 1.0, // Add uncertainty // The hole for a speaker
   holes_angle = 70, // The height of the wire and speaker holes
-  display_mode = 0 // How the casing is displayed:
+  display_mode = 3 // How the casing is displayed:
   // 0: to print, both
   // 1: to print, lower half, with wire holes
   // 2: to print, upper half, with text
@@ -267,12 +267,15 @@ module draw_lower_egg_without_holes(params)
   hole_diameter = struct_val(params, "hole_diameter");
   nut_outer_diameter = struct_val(params, "nut_outer_diameter");
   sphere_diameter = struct_val(params, "sphere_diameter");
+  sphere_length = struct_val(params, "sphere_length");
   wall_thickness = struct_val(params, "wall_thickness");
   color([0,1,0])
     difference() {
       draw_hollow_egg(params);
       translate([-(sphere_diameter / 2), -(sphere_diameter / 2), -(height / 2)])
         cube(sphere_diameter);
+      translate([-(wall_thickness / 2), -(sphere_diameter / 2),height])
+        cube([wall_thickness, sphere_diameter, sphere_diameter]);
     };
   // Connect sphere to bolt
   color([0.5,1,0.5])
