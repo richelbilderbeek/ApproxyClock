@@ -20,7 +20,7 @@ params = create_params(
   wire_hole_diameter = 3.4 + 1.0, // Add uncertainty // The hole for a wire
   speaker_hole_diameter = 2.0 + 1.0, // Add uncertainty // The hole for a speaker
   holes_angle = 70, // The height of the wire and speaker holes
-  display_mode = 3 // How the casing is displayed:
+  display_mode = 4 // How the casing is displayed:
   // 0: to print, both
   // 1: to print, lower half, with wire holes
   // 2: to print, upper half, with text
