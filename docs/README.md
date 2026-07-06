@@ -8,7 +8,7 @@ It is a clock that gives the correct time, but humans can only approximately est
 
 - [Photos](photos/README.md)
 - [Parts list](parts_list/README.md)
-- [Code](src/README.md)
+- [Code](src/approxyclock/README.md)
 - [Schematic](schematic/README.md)
 - [Casing](casing/README.md)
 - [FAQ](faq.md)
