@@ -20,13 +20,14 @@ params = create_params(
   wire_hole_diameter = 3.4 + 1.0, // Add uncertainty // The hole for a wire
   speaker_hole_diameter = 2.0 + 1.0, // Add uncertainty // The hole for a speaker
   holes_angle = 70, // The height of the wire and speaker holes
-  display_mode = 4 // How the casing is displayed:
-  // 0: to print, both
+  display_mode = 3 // How the casing is displayed:
+  // 0: to print, all
   // 1: to print, lower half, with wire holes
   // 2: to print, upper half, with text
-  // 3: assambled
-  // 4: assambled, cutout from left to right
-  // 5: assambled, cutout from front to back
+  // 3: to print, inserter
+  // 4: assambled
+  // 5: assambled, cutout from left to right
+  // 6: assambled, cutout from front to back
 );
 
 // Some warnings
@@ -313,6 +314,38 @@ module draw_lower_egg(params)
     }
 }
 
+// The horizontal part of the T piece on the inside
+module draw_led_holder(params) 
+{
+  check_params(params);
+  hole_diameter = struct_val(params, "hole_diameter");
+  air_gap = struct_val(params, "air_gap");
+  color([0,0,0])
+      cylinder(1, d = hole_diameter - air_gap);
+
+}
+
+// The vertical part of the T piece on the inside
+module draw_comb(params) 
+{
+  check_params(params);
+  sphere_diameter = struct_val(params, "sphere_diameter");
+  sphere_length = struct_val(params, "sphere_length");
+  hole_diameter = struct_val(params, "hole_diameter");
+  hole_length = struct_val(params, "hole_length");
+
+  wall_thickness = struct_val(params, "wall_thickness");
+  air_gap = struct_val(params, "air_gap");
+  intersection() {
+    scale([1, sphere_diameter, sphere_length])
+      rotate([90, 0, 0])
+        cylinder(wall_thickness, d = 1);
+    translate([0, 0, -hole_diameter])
+      #cylinder(hole_length, d = hole_diameter);
+  }
+}
+
+
 // The upper half has the nut
 module draw_upper_half(params) 
 {
@@ -329,14 +362,30 @@ module draw_lower_half(params)
   draw_bolt(params);
 }
 
+// The T piece on the inside
+module draw_inserter(params) 
+{
+  check_params(params);
+  draw_led_holder(params);
+  draw_comb(params);
+}
+
 //-----------------------------------------------------------------------
 // Displayal
 //-----------------------------------------------------------------------
+  // 0: to print, all
+  // 1: to print, lower half, with wire holes
+  // 2: to print, upper half, with text
+  // 3: to print, inserter
+  // 4: assambled
+  // 5: assambled, cutout from left to right
+  // 6: assambled, cutout from front to back
+
 module display(params)
 {
   check_params(params);
   display_mode = struct_val(params, "display_mode");
-  if (display_mode == 0 || display_mode == 1 || display_mode == 2) 
+  if (display_mode == 0 || display_mode == 1 || display_mode == 2 || display_mode == 3) 
   {
     // Make the outsides be up; only scaffolding marks on the inside
     if (display_mode == 0 || display_mode == 2)
@@ -350,31 +399,45 @@ module display(params)
       rotate([180, 0, 0])
       draw_lower_half(params);
     }
-  }
-  else if (display_mode == 3) 
-  {
-    draw_lower_half(params);
-    draw_upper_half(params);
+    if (display_mode == 0 || display_mode == 3)
+    {
+      sphere_diameter = struct_val(params, "sphere_diameter");
+      translate([sphere_diameter + 1, 0, 0])
+      rotate([180, 0, 0])
+      draw_inserter(params);
+    }
   }
   else if (display_mode == 4) 
   {
-    // Show cutout
-    difference() {
-      draw_lower_half(params);
-      translate([-500,0,-500])
-        cube([1000, 100, 1000]);
-    }
-    difference() {
-      draw_upper_half(params);
-      translate([-500,0,-500])
-        cube([1000, 100, 1000]);
-    }
-  } 
+    draw_lower_half(params);
+    draw_upper_half(params);
+    draw_inserter(params);
+  }
   else if (display_mode == 5) 
   {
     // Show cutout
     difference() {
       draw_lower_half(params);
+      translate([-500,0,-500])
+        cube([1000, 100, 1000]);
+    }
+    difference() {
+      draw_upper_half(params);
+      translate([-500,0,-500])
+        cube([1000, 100, 1000]);
+    }
+    difference() {
+      draw_inserter(params);
+      translate([-500,0,-500])
+        cube([1000, 100, 1000]);
+    }
+    
+  } 
+  else if (display_mode == 6) 
+  {
+    // Show cutout
+    difference() {
+      draw_lower_half(params);
       translate([0,-500,-500])
         cube([100, 1000, 1000]);
     }
@@ -383,6 +446,12 @@ module display(params)
       translate([0,-500,-500])
         cube([100, 1000, 1000]);
     }
+    difference() {
+      draw_inserter(params);
+      translate([0,-500,-500])
+        cube([100, 1000, 1000]);
+    }
+
   } 
 
 }
